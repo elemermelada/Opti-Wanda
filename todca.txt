@@ -1,0 +1,106 @@
+@@@Variables - parametros:
+t = espesor poste
+r = radio interior poste 
+W_1 = peso luz unitario
+W_p : peso del poste 
+R = radio zona circular del poste 
+h = altura de la zona lineal del poste 
+n = numero de luces en cada poste.    1ª aprox ~ cte 
+S_1 = superficie unitaria de cada luz
+I : iluminación en cada punto
+I_m : iluminación media
+eps: desviación de la iluminación
+I_reff : iluminación de referencia
+P = potencia
+Np = número de postes
+P1 : potencia unitaria de cada luz
+eta = rendimineto de las luces
+P_reff = Potencia de referencia. 
+
+
+@@@Valores numéricos paramteros: 
+material: acero galvanizado S235JR,  Rp02 = 235 MPa y E_young = 210 GPa 
+zona circular viga (R): 2.5 m 
+C_d = 1.28 (placa plana, Álvaro)            
+W_1 = 3*9.81 N
+r = 0.1 m 
+mínima altura zona lineal viga (h0) = 30 m
+mínimo número luces en cada poste (n0) = 1
+S_1 = 0.0675 m^2
+I_reff = 2000 lux
+Np = 6
+P1 = 150 W
+eta = 0.9
+P_reff = 100000W
+V = 52 m/s
+
+@@@Restricciones:
+mínima altura zona linela poste: h>h0
+mínimo número luces en cada poste: n>n0 
+angulo cabeceo : [-pi/2,0] ejes horizonte local 
+
+@Restricción sobre la función objetivo:
+P_adim < 2
+
+
+@ Coordenada generalizada
+Geometría del recinto: rectángulo
+Origen de coordenadas: ángulo con la horizontal, positivo hacia la dcha
+
+
+######1: consumo
+P = n * Np * P1 * eta
+
+Minimizar el consumo : P_adim = P/P_reff que tienda a cero 
+
+
+######2: visibilidad, reducir espesor viga
+sigma_x = - 4/pi * M_y / [(t+r)^4 - r^4] *r + (W_p + W_1*n)/[(r+t)^2 - r^2]
+M_y = W_1*n*R + D(R+h)
+D = 1/2 ro (n*S_1)* V^2 * C_d
+W_p = pi*[(r+t)^2 - r^2]*(h + pi/2*r) * 7850 
+
+
+Minimizar el espesor: t_adim = t/t_reff tienda a cero (minimizar)
+
+
+######3: iluminacion
+I_m = 1/A int(int(I*dxdy))
+eps^2 = 1/A int(int((I-I_m)^2 *dxdy))
+
+maximizar la iluminación : I_adim = -(I_m/I_reff -1) tienda a cero
+minimizar la desviación :  eps_adim = eps/I_reff tienda a cero
+
+#############################################
+FUNCION OBJETIVO:
+
+PHI = c1*P_adim + c2*t_adim + c3*I_adim +c4*eps_adim 
+
+PHII = c1*n * Np * P1 * eta/P_reff + c2*t/t_reff - c3*(I/I_reff -1) + c4*eps/I_reff
+
+#############################################
+Ejs adicionales:
+Corregir la superficie aerodim con un coseno. Sustentacion se incluye en análisis posteriores
+Peso adicional de nieve. peso_unitario = peso_nieve + peso_luz
+Introducir la lingitud del cable en función de la posición de la fuente de alimenación
+Restricción de paridad en nº luces 
+Número de postes variable
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
