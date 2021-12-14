@@ -86,6 +86,21 @@ Introducir la lingitud del cable en función de la posición de la fuente de ali
 Restricción de paridad en nº luces 
 Número de postes variable
 
+#############################################
+Optimización mono-objetivo:
+Teniendo solo en cuenta la intensidad media, la solución óptima en términos de posición de los 
+postes es situarlos en el punto medio del lado largo, sin importar en cuál de los dos lados largos
+se coloca cada poste. Empleando el método del gradiente con un vector inicial en el que los postes 
+están equiespaciados en chi, la optimización consigue colocar los cuatro postes que originalmente 
+estaban en los lados largos en su punto medio, mientras que los postes de los lados cortos quedan
+situados en los puntos medios de los lados cortos, no consiguiendo sobrepasar la condición desfavorable
+de posición de los postes en las proximidades de la esquina para colocarse en los lados largos. (El 
+genetic algorithm debería poder enviar todos los postes a los lados largos).
+En cuanto a theta, la posición óptima es orientar los focos hacia el interior del recinto, en la 
+dirección normal a su frontera. fmincon logra alcanzar esta solución.
+El valor de gamma también se mejora respecto de la condición inicial, quedando en aproximadamente 
+0,86 rad.
+
 
 
 
