@@ -1,13 +1,15 @@
-function eps = intensidad_s(I_0,I_m,postes,h,w,l,m1,m2)
+function eps = intensidad_s(I_0,I_m,postes,R,h,w,l,m1,m2)
 
     f_I = @(x,y) 0;
     
     for poste = postes'
         poste=poste';
-        xa=poste(1);
-        ya=poste(2);
-        th=poste(3);
-        g=poste(4);
+        chi=poste(1);
+        th=poste(2);
+        g=poste(3);
+
+        [xa ya] = coord_postes(chi,w,l,h,R);
+        
         f_I = @(x,y) (f_I(x,y) + I_0*foco(x,y,xa,ya,th,g,h,m1,m2));
     end
 

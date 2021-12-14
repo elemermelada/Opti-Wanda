@@ -5,7 +5,7 @@ h=10;
 th = [0:0.01:2*pi];
 %polarplot(th,fi(cos(th),m1,m2));
 
-postes=[0	0	0	pi/2];
+postes=[0	0	0	0.6];
 %dimensiones del campo
 [X,Y] = meshgrid(-l/2:1:l/2,-w/2:1:w/2);
 
@@ -26,7 +26,9 @@ postes=[0	0	0	pi/2];
 Z=f_I(X,Y);
 
 surf(X,Y,Z);
-integral2(f_I,-100000000,100000000,-100000000,10000000)/n
+integral2(f_I,-100000000,100000000,-100000000,10000000)
+
+stop
 
 y=[]
 for i =[0:0.02:pi]
