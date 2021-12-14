@@ -13,7 +13,8 @@ function eps = intensidad_s(I_0,I_m,postes,R,h,w,l,m1,m2)
         f_I = @(x,y) (f_I(x,y) + I_0*foco(x,y,xa,ya,th,g,h,m1,m2));
     end
 
-    f2=@(x,y) I_m;
+    %f2=@(x,y) I_m;
+    f2=@(x,y) 1.218797480267127e+06;
     f_I=@(x,y) (f_I(x,y)-f2(x,y));
     f_I=@(x,y) f_I(x,y).*f_I(x,y);
 

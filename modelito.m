@@ -12,8 +12,8 @@ function obj = modelito(x)
     t_adim = t/t_reff;
     P_adim = P/P_reff;
     I_adim = -(I_m/I_reff-1);
-    eps_adim = 0.05*eps/I_reff;
+    eps_adim = eps/I_reff*10;
 
-    obj = I_adim + eps_adim;
+    obj = 0*I_adim + eps_adim;
 
 end
