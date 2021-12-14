@@ -1,5 +1,5 @@
 %% INIT
-
+run("ctes.m");
 nvars = 18; %numero de varibles que usa
 PopulationSize_Data = 20; % numero de miembros que forman la poblacion
 MaxGenerations_Data = nvars*100; % numero max de generaciones
