@@ -1,4 +1,4 @@
-function obj = modelito(x)
+function obj = modelito(x,p)
 
     run("ctes.m");
     postes=reshape(x, 3, Np)';
@@ -12,8 +12,8 @@ function obj = modelito(x)
     t_adim = t/t_reff;
     P_adim = P/P_reff;
     I_adim = -(I_m/I_reff-1);
-    eps_adim = eps/I_reff;
+    eps_adim = 100*eps/I_reff;
 
-    obj = 10*I_adim + 0.02*eps_adim;
+    obj = p*I_adim + (1-p)*eps_adim;
 
 end

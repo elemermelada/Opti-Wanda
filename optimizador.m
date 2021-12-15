@@ -11,8 +11,15 @@ x0=[0.01,4.712389007179587,1.0,1.0471976,3.1415927000000003,1.0,2.0943951,3.1415
 %% FMINCON
 options = optimoptions('fmincon');
 options = optimoptions(options,'Display', 'iter-detailed');
+options = optimoptions(options,'UseParallel', true);
 
-x = fmincon(@modelito,x0,[],[],[],[],res(:,1),res(:,2),[],options);
+pareto = [];
+
+for p = [0.75]
+    f_param = @(x) modelito(x,p);
+    x = fmincon(f_param,x0,[],[],[],[],res(:,1),res(:,2),[],options);
+    pareto = [pareto;x];
+end
 
 %% GENETIC ALGORITHM
 options_ga = optimoptions('ga');
