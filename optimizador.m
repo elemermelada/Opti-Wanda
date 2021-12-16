@@ -30,7 +30,10 @@ options_ga = optimoptions(options_ga,'UseParallel', true);
 options_ga = optimoptions(options_ga,'FunctionTolerance', FunctionTolerance_Data);
 options_ga = optimoptions(options_ga,'ConstraintTolerance', ConstraintTolerance_Data);
 options_ga = optimoptions(options_ga,'Display', 'diagnose');
-%options_ga = optimoptions(options_ga,'PlotFcn', {  @gaplotbestf @gaplotbestindiv @gaplotdistance @gaplotexpectation @gaplotgenealogy @gaplotrange @gaplotscorediversity @gaplotscores @gaplotselection @gaplotstopping @gaplotmaxconstr });
+options_ga = optimoptions(options_ga,'PlotFcn', {  @gaplotbestf @gaplotbestindiv @gaplotdistance @gaplotexpectation @gaplotgenealogy @gaplotrange @gaplotscorediversity @gaplotscores @gaplotselection @gaplotstopping @gaplotmaxconstr });
+
+p=0.75;
+f_param = @(x) modelito(x,p);
 
 [x_ga,fval,exitflag,output,population,score] = ...
-ga(@modelito,nvars,[],[],[],[],res(:,1),res(:,2),[],[],options_ga);
+ga(f_param,nvars,[],[],[],[],res(:,1),res(:,2),[],[],options_ga);
