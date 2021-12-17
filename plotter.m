@@ -1,7 +1,7 @@
 function plotter(x)
     
     run("ctes.m");
-    postes=reshape(x, 3, Np)';
+    postes=reshape(x, 3, [])';
     
     [X,Y] = meshgrid(-l/2:1:l/2,-w/2:1:w/2);
     

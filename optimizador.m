@@ -7,8 +7,9 @@ FunctionTolerance_Data = 1e-6; % tolerancia usada en la funcion
 ConstraintTolerance_Data = 1e-4; %tolerancia usada en la constrain
 
 x0=[0.01,4.712389007179587,1.0,1.0471976,3.1415927000000003,1.0,2.0943951,3.1415927000000003,1.0,3.1415927,1.5707962999999996,1.0,4.1887902,0.01,1.0,5.2359878,0.01,1.0];
+x0_sym=[0.0100    4.7124    1.0000 1.0472    3.1416    1.0000];
 
-%% FMINCON
+%% FMINCON CASO GENERAL
 options = optimoptions('fmincon');
 options = optimoptions(options,'Display', 'iter-detailed');
 options = optimoptions(options,'UseParallel', true);
@@ -20,6 +21,28 @@ for p = [0.75]
     x = fmincon(f_param,x0,[],[],[],[],res(:,1),res(:,2),[],options);
     pareto = [pareto;x];
 end
+
+%% FMINCON CASO SIMÉTRICO
+options = optimoptions('fmincon');
+options = optimoptions(options,'Display', 'iter-detailed');
+options = optimoptions(options,'UseParallel', true);
+
+pareto = [];
+
+for p = [0.75]
+    f_param = @(x) modelito_sym(x,p);
+    x = fmincon(f_param,x0_sym,[],[],[],[],res_sym(:,1),res_sym(:,2),[],options);
+    pareto = [pareto;x];
+end
+
+postes=reshape(x, 3, 2)';
+postes_sym=[];
+for poste=postes'   %añadir los simétricos
+    tmp=symm(poste',w,l,h,R);
+    tmp=reshape(tmp, 3, 4)';
+    postes_sym=[postes_sym;tmp];
+end
+postes=postes_sym;  %aquí no ha pasado nada
 
 %% GENETIC ALGORITHM
 options_ga = optimoptions('ga');

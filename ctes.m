@@ -35,7 +35,11 @@ n=100;                  %Nº DE LUCES POR POSTE
 %% OPTIMIZADOR
 %Restricciones
 res_chi = [0,2*pi];     %chi de 0 a 2*pi
+res_chi_sym = [0,pi/2]; %chi de 0 a pi/2
 res_th = [0,2*pi];      %theta de 0 a 2*pi
 res_g = [0,pi/2];       %gammaa de 0 a pi/2
 res = [res_chi;res_th;res_g];
 res = repmat(res,[Np 1]);
+
+res_sym = [res_chi_sym;res_th;res_g];
+res_sym = repmat(res_sym,[2 1]);    %2postes por cuadrante
