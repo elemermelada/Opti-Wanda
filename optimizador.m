@@ -29,20 +29,23 @@ options = optimoptions(options,'UseParallel', true);
 
 pareto = [];
 
-for p = [0.75]
+for p = [0:0.1:1]
     f_param = @(x) modelito_sym(x,p);
     x = fmincon(f_param,x0_sym,[],[],[],[],res_sym(:,1),res_sym(:,2),[],options);
-    pareto = [pareto;x];
+
+    postes=reshape(x, 3, 2)';
+    postes_sym=[];
+    for poste=postes'   %añadir los simétricos
+        tmp=symm(poste',w,l,h,R);
+        %tmp=reshape(tmp, 3, 4)';
+        postes_sym=[postes_sym,tmp];
+    end
+    postes=postes_sym;  %aquí no ha pasado nada
+
+    pareto = [pareto;postes];
 end
 
-postes=reshape(x, 3, 2)';
-postes_sym=[];
-for poste=postes'   %añadir los simétricos
-    tmp=symm(poste',w,l,h,R);
-    tmp=reshape(tmp, 3, 4)';
-    postes_sym=[postes_sym;tmp];
-end
-postes=postes_sym;  %aquí no ha pasado nada
+
 
 %% GENETIC ALGORITHM
 options_ga = optimoptions('ga');

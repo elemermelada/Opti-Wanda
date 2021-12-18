@@ -1,7 +1,7 @@
 function obj = modelito(x,p)
 
     run("ctes.m");
-    postes=reshape(x, 3, Np)';
+    postes=reshape(x, 3, [])';
 
     %% OBJETIVOS
     t=visibilidad(n,h,r,R,rho,Cd,V,S_1,W_1,rho_acero,Rp02);
