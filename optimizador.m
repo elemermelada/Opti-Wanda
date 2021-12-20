@@ -8,7 +8,7 @@ x0=[0.01,4.712389007179587,1.0,1.0471976,3.1415927000000003,1.0,2.0943951,3.1415
 x0_sym=[0.0100    4.7124    1.0000 1.0472    3.1416    1.0000];
 
 PopulationSize_Data = 20; % numero de miembros que forman la poblacion
-
+    
 FunctionTolerance_Data = 1e-6; % tolerancia usada en la funcion
 ConstraintTolerance_Data = 1e-4; %tolerancia usada en la constrain
 
@@ -39,21 +39,29 @@ for p = [0.75]
 end
 
 %% FMINCON CASO SIMÉTRICO
+tic
+for n_F=[100:10:200]
 for p = [.0:.1:1]
-    f_param = @(x) modelito_sym(x,[p,1-p,0,0]);
+    n_F-100 + p*9                               %progreso
+    f_param = @(x) modelito_sym(x,[p,1-p,0,0],n_F);
     x = fmincon(f_param,x0_sym,[],[],[],[],res_sym(:,1),res_sym(:,2),[],options);
 
-    postes=reshape(x, 3, [])';
-    postes_sym=[];
-    for poste=postes'   %añadir los simétricos
-        tmp=symm(poste',w,l,h,R);
-        %tmp=reshape(tmp, 3, 4)';
-        postes_sym=[postes_sym,tmp];
-    end
-    postes=postes_sym;  %aquí no ha pasado nada
+%     postes=reshape(x, 3, [])';
+%     postes_sym=[];
+%     for poste=postes'   %añadir los simétricos
+%         tmp=symm(poste',w,l,h,R);
+%         %tmp=reshape(tmp, 3, 4)';
+%         postes_sym=[postes_sym,tmp];
+%     end
+%     postes=postes_sym;  %aquí no ha pasado nada
+% 
+%     pareto = [pareto;postes];
 
-    pareto = [pareto;postes];
+    pareto=[pareto;n_F,p,x];
+
 end
+end
+toc
 
 %% GENETIC ALGORITHM
 options_ga = optimoptions(options_ga,'MaxGenerations', 100*18);

@@ -1,6 +1,7 @@
-function obj = modelito_sym(x,p)
+function obj = modelito_sym(x,p,n_F)
 
     run("ctes.m");
+    n=n_F;
     postes=reshape(x, 3, [])';   %2 focos por cuadrante
 
     postes_sym=[];

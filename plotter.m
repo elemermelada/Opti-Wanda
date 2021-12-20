@@ -21,6 +21,16 @@ function plotter(x)
     surf(X,Y,Z,"LineWidth",0.01);
     xlim([-50,50]);
     ylim([-35,35]);
+
+    cmap=[];
+    for i = [0:0.005:1]
+        cmap =[cmap;ones(1,3)*i];
+    end
+    colormap(cmap);
+    %caxis([0 max(max(Z))])
+    %max(max(Z))
+    caxis([0 0.0012])
+    %set(gca,'DataAspectRatio',[1 1 max(max(Z))/30])
     
 
 end

@@ -1,4 +1,4 @@
-%load('pareto_result_sym.mat')
+load('pareto_result_sym.mat')
 
 %% CALC FVALS
 figure(1)
