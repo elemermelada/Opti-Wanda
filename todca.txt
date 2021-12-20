@@ -101,8 +101,14 @@ dirección normal a su frontera. fmincon logra alcanzar esta solución.
 El valor de gamma también se mejora respecto de la condición inicial, quedando en aproximadamente 
 0,86 rad.
 
-
-
+#############################################
+Optimización del código empleado:
+El planteamiento original del objetivo de visibilidad, consistente en la minimización del espesor de
+los postes, incluía la resolución del módulo de resistencia de materiales y aerodinámica empleando el
+espesor como variable simbólica. Este método conlleva un elevado tiempo de cálculo, por lo que 
+ralentizaría de forma notable el problema de optimización en su conjunto. Para solucionar esto, se ha
+obtenido la expresión analítica del espesor necesario en función del número de focos por poste, lo que
+ha permitido reducir, para los valores de n analizados, el tiempo de cálculo por un factor de 300.
 
 
 

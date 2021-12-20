@@ -24,6 +24,11 @@ options_ga = optimoptions(options_ga,'ConstraintTolerance', ConstraintTolerance_
 options_ga = optimoptions(options_ga,'Display', 'diagnose');
 options_ga = optimoptions(options_ga,'PlotFcn', {  @gaplotbestf @gaplotbestindiv @gaplotdistance @gaplotexpectation @gaplotgenealogy @gaplotrange @gaplotscorediversity @gaplotscores @gaplotselection @gaplotstopping @gaplotmaxconstr });
 
+options_ps = optimoptions('paretosearch');
+options_ps = optimoptions(options_ps,'UseParallel', true);
+options_ps = optimoptions(options_ps,'Display', "diagnose");
+options_ps = optimoptions(options_ps,'UseVectorized', true);
+
 pareto = [];
 
 %% FMINCON CASO GENERAL
@@ -34,7 +39,7 @@ for p = [0.75]
 end
 
 %% FMINCON CASO SIMÉTRICO
-for p = [0.7:0.01:0.8]
+for p = [.0:.1:1]
     f_param = @(x) modelito_sym(x,[p,1-p,0,0]);
     x = fmincon(f_param,x0_sym,[],[],[],[],res_sym(:,1),res_sym(:,2),[],options);
 
@@ -79,3 +84,7 @@ for p = [0:0.1:1]
 
     pareto = [pareto;postes];
 end
+
+%% PARETO SEARCH SIMÉTRICO (NOT WORKING)
+f_param = @(x) [modelito_sym(x,[0,1,0,0]),modelito_sym(x,[1,0,0,0])];
+x=paretosearch(f_param,6,[],[],[],[],res_sym(:,1),res_sym(:,2),[],options_ps);
