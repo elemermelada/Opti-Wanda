@@ -30,7 +30,7 @@ h=30;                   %m
 Np=6;                   %Nº DE POSTES
 
 %% VARIABLES
-n=100;                  %Nº DE LUCES POR POSTE
+n=150;                  %Nº DE LUCES POR POSTE
 
 %% OPTIMIZADOR
 %Restricciones
