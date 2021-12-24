@@ -32,4 +32,4 @@ function obj = modelito_sym_esq(x,p)
 
     obj = p*I_adim + (1-p)*eps_adim;
 
-end
+end 
