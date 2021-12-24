@@ -35,6 +35,6 @@ function t = visibilidad(n,h,r,R,rho,Cd,V,S_1,W_1,rho_acero,Rp02,coef_min,coef_m
     l2=c;
     l3=(a+c*r^2+r^4*(-sigmax_max-b));
 
-    t=sqrt(0.5*(-l2+sqrt(l2.^2-4*l1.*l3))./l1)-r;
+    t=sqrt(0.5*(-l2+sqrt(l2.^2-4*l1.*l3))./l1)-r; 
     
 end
