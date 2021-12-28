@@ -111,6 +111,13 @@ obtenido la expresión analítica del espesor necesario en función del número 
 ha permitido reducir, para los valores de n analizados, el tiempo de cálculo por un factor de 300.
 
 
+#############################################
+Información de la instalación eléctrica:
+Cables: RV 0,6/1 kV. norma UNE 21.123. Sección 5G10mm2. Resistencia: 1,83 Ohmio/km. 
+  Fuente: file:///C:/Users/user/AppData/Local/Temp/DOC20190125094030PROYECTO+Iluminacion.pdf
+  (problema semejante)
+Tensión nominal: 1000 V (misma fuente)
+Posición del transformador: (0,-50) (m): para conservar un plano de simetría
 
 
 
