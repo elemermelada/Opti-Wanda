@@ -114,7 +114,7 @@ ha permitido reducir, para los valores de n analizados, el tiempo de cálculo po
 #############################################
 Información de la instalación eléctrica:
 Cables: RV 0,6/1 kV. norma UNE 21.123. Sección 5G10mm2. Resistencia: 1,83 Ohmio/km. 
-  Fuente: file:///C:/Users/user/AppData/Local/Temp/DOC20190125094030PROYECTO+Iluminacion.pdf
+  Fuente: https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwji3J2HlIf1AhXpCGMBHQguBnMQFnoECAIQAQ&url=https%3A%2F%2Fcontrataciondelestado.es%2Fwps%2Fwcm%2Fconnect%2Fc47a5bb5-9744-4e26-b960-12cf3f03c9cb%2FDOC20190125094030PROYECTO%252BIluminacion.pdf%3FMOD%3DAJPERES%26attachment%3Dtrue%26CACHE%3DNONE%26CONTENTCACHE%3DNONE&usg=AOvVaw2hrXDm7qfwoBgSPxnOj93f
   (problema semejante)
 Tensión nominal: 1000 V (misma fuente)
 Posición del transformador: (0,-50) (m): para conservar un plano de simetría
