@@ -25,6 +25,7 @@ for n=100:10:200
         subplot(3,4,p*10+1)
         %(n-100)*11+p*10+1
         plotter(pareto_ext(round((n-100)/10*11+p*10+1),:))
+        title("p=" + p)
     end
 end
 
@@ -36,8 +37,13 @@ for n=100:10:200
         f_val=[f_val;modelito_sym(pareto_simp(round((n-100)/10*11+p*10+1),:),[1,0,0,0],100),modelito_sym(pareto_simp(round((n-100)/10*11+p*10+1),:),[0,1,0,0],100)];
     end
     f_val
+    figure(101)
     subplot(3,4,round((n-100)/10)+1)
-    plot(f_val(:,1),f_val(:,2))
+    plt=plot(f_val(:,1),f_val(:,2));
+    row = dataTipTextRow('p=',[0:0.1:1]);
+    plt.DataTipTemplate.DataTipRows(1).Label = 'eps';
+    plt.DataTipTemplate.DataTipRows(2).Label = 'Im';
+    plt.DataTipTemplate.DataTipRows(end+1) = row;
     title("n="+n)
     drawnow
 end

@@ -40,9 +40,10 @@ end
 
 %% FMINCON CASO SIMÉTRICO
 tic
-for n_F=[100:10:200]
+%x0=[0.352733063479383	4.49557244386181	0.862905273425334	1.12758970936535	3.24342681639821	0.867682254510807]; %n=150
+for n_F=[150]
 for p = [.0:.1:1]
-    n_F-100 + p*9                               %progreso
+    %n_F-100 + p*9                               %progreso
     f_param = @(x) modelito_sym(x,[p,1-p,0,0],n_F);
     x = fmincon(f_param,x0_sym,[],[],[],[],res_sym(:,1),res_sym(:,2),[],options);
 
@@ -74,10 +75,12 @@ for p = [0:0.1:1]
 end
 
 %% GENETIC ALGORITHM CASO SIMÉTRICO
-options_ga = optimoptions(options_ga,'MaxGenerations', 100*18);
+options_ga = optimoptions(options_ga,'MaxGenerations', 300);
 options_ga = optimoptions(options_ga,'InitialPopulationMatrix', x0_sym);
+for n_F=[100,110,130,140,160,180,190,200]
 for p = [0:0.1:1]
-    f_param = @(x) modelito_sym(x,[p,1-p,0,0]);
+    p*100 + "%"
+    f_param = @(x) modelito_sym(x,[p,1-p,0,0],120);
     [x_ga,fval,exitflag,output,population,score] = ...
     ga(f_param,6,[],[],[],[],res_sym(:,1),res_sym(:,2),[],[],options_ga);
 
@@ -91,6 +94,8 @@ for p = [0:0.1:1]
     postes=postes_sym;  %aquí no ha pasado nada
 
     pareto = [pareto;postes];
+end
+save("autopareto" + n_F,"pareto");
 end
 
 %% PARETO SEARCH SIMÉTRICO (NOT WORKING)

@@ -30,6 +30,8 @@ function plotter(x)
     %caxis([0 max(max(Z))])
     %max(max(Z))
     caxis([0 0.0012])
+    view(2)
+    %axis equal
     %set(gca,'DataAspectRatio',[1 1 max(max(Z))/30])
     
 
