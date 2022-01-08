@@ -34,7 +34,7 @@ pareto_ga=pareto_ga(:,[1,2,3,13,14,15]);
 
 %% PARETO
 figure(101)
-for n=100:10:180
+for n=190:10:200
     f_val=[];
     f_val_ga=[];
     for p=0:0.1:1

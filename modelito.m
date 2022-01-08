@@ -1,6 +1,7 @@
-function obj = modelito(x,p)
+function obj = modelito(x,p,n_F)
 
     run("ctes.m");
+    n=n_F;
     postes=reshape(x, 3, [])';
 
     %% OBJETIVOS
