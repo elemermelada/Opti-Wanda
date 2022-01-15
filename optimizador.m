@@ -10,11 +10,12 @@ x0_sym=[0.0100    4.7124    1.0000 1.0472    3.1416    1.0000];
 PopulationSize_Data = 20; % numero de miembros que forman la poblacion
     
 FunctionTolerance_Data = 1e-6; % tolerancia usada en la funcion
-ConstraintTolerance_Data = 1e-4; %tolerancia usada en la constrain
+ConstraintTolerance_Data = 1e-4; % tolerancia usada en la constrain
 
 options = optimoptions('fmincon');
 options = optimoptions(options,'Display', 'iter-detailed');
 options = optimoptions(options,'UseParallel', true);
+options = optimoptions(options,'Algorithm', "sqp");
 
 options_ga = optimoptions('ga');
 options_ga = optimoptions(options_ga,'PopulationSize', PopulationSize_Data);
@@ -41,11 +42,11 @@ end
 %% FMINCON CASO SIMÉTRICO
 tic
 %x0=[0.352733063479383	4.49557244386181	0.862905273425334	1.12758970936535	3.24342681639821	0.867682254510807]; %n=150
-for n_F=[150]
-for p = [.0:.1:1]
+for n_F=[100]
+for p = [1]
     %n_F-100 + p*9                               %progreso
     f_param = @(x) modelito_sym(x,[p,1-p,0,0],n_F);
-    x = fmincon(f_param,x0_sym,[],[],[],[],res_sym(:,1),res_sym(:,2),[],options);
+    x = fmincon(f_param,x0_sym,[],[],[],[],res_sym(:,1),res_sym(:,2),@mycon,options);
 
 %     postes=reshape(x, 3, [])';
 %     postes_sym=[];
@@ -77,12 +78,12 @@ end
 %% GENETIC ALGORITHM CASO SIMÉTRICO
 options_ga = optimoptions(options_ga,'MaxGenerations', 300);
 options_ga = optimoptions(options_ga,'InitialPopulationMatrix', x0_sym);
-for n_F=[100,110,130,140,160,180,190,200]
-for p = [0:0.1:1]
+for n_F=[100]
+for p = [1]
     p*100 + "%"
     f_param = @(x) modelito_sym(x,[p,1-p,0,0],120);
     [x_ga,fval,exitflag,output,population,score] = ...
-    ga(f_param,6,[],[],[],[],res_sym(:,1),res_sym(:,2),[],[],options_ga);
+    ga(f_param,6,[],[],[],[],res_sym(:,1),res_sym(:,2),@mycon,[],options_ga);
 
     postes=reshape(x_ga, 3, [])';
     postes_sym=[];
